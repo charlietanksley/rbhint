@@ -161,9 +161,11 @@ RSpec.describe 'RuboCop Project', type: :feature do
         end
 
         it 'has a valid URL' do
+          repo = '(rubocop-hq/rubocop|zspencer/rbhint)'
+          type = '(?:issues|pull)'
           issues.each do |issue|
             number = issue[:number].gsub(/\D/, '')
-            pattern = %r{^https://github\.com/rubocop-hq/rubocop/(?:issues|pull)/#{number}$}
+            pattern = %r{^https://github\.com/#{repo}/#{type}/#{number}}
             expect(issue[:url]).to match(pattern)
           end
         end
